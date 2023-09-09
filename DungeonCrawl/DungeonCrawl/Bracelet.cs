@@ -14,7 +14,5 @@ namespace DungeonCrawl
             Name = "Reflective Bracelet";
             Description = "A suspiciously refelctive bracelet";
         }
-
-
     }
 }

@@ -31,10 +31,11 @@ namespace DungeonCrawl
             bool done = false;
             do
             {
+                Util.Print("What is your name?", ConsoleColor.DarkYellow);
                 input = Console.ReadLine();
                 if (input.Any(char.IsDigit) || !input.Any(char.IsLetter))
                 {
-                    Console.WriteLine("Only letters, try again");
+                    Util.Print("Only letters, try again", ConsoleColor.DarkRed);
                 }
                 else
                 {

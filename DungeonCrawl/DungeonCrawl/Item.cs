@@ -15,12 +15,10 @@ namespace DungeonCrawl
 
         public void DescribeItem()
         {
-            Console.ForegroundColor= ConsoleColor.Cyan;
-            Console.WriteLine(Name);
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine(Description);
-            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
+            Util.Print(Name, ConsoleColor.Cyan);
+            Util.Print(Description, ConsoleColor.DarkCyan);
+
         }
 
         public virtual void UseItem()

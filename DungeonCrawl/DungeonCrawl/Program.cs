@@ -4,11 +4,8 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-            Art.PrintChurch();
-
-            GameManager gm = new GameManager();
-            gm.RunGame();
+            Game gm = new Game();
+            gm.NewGame();
         }
     }
 }
