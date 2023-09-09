@@ -11,7 +11,7 @@ namespace DungeonCrawl
         int waitCounter;
         public OutdoorEntrance(Room[] world) 
         {
-            world = passedWorld;
+            passedWorld = world;
 
             waitCounter= 0;
             Info = "You stand before the Cathedral of Liam, know to hold the powerful treasure.";
@@ -48,6 +48,9 @@ namespace DungeonCrawl
                         if (keyInfo == ConsoleKey.Enter)
                         {
                             Util.Print("You decide to enter. 'Any Key' to continue", ConsoleColor.Green);
+
+                            //We move into the next room
+                            
                             makingDecision = true;
                         }
                         else if (keyInfo == ConsoleKey.Tab)
@@ -98,7 +101,6 @@ namespace DungeonCrawl
 
         public override void PresentRoom()
         {
-            base.PresentRoom();
             ChooseOption();
         }
 

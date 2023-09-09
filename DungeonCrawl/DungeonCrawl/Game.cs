@@ -15,17 +15,17 @@ namespace DungeonCrawl
         OutdoorEntrance entrace;
         Cathedral cath;
 
-        private Room[] rooms;
+        private World world;
+        private int worldIndex;
         public Game() 
         {
-            // Random rooms, max of 4;
-            rooms = new Room[5];
+            world = new World();
 
-            entrace = new OutdoorEntrance(rooms);
-            cath = new Cathedral(rooms);
+            entrace = new OutdoorEntrance(world.map);
+            cath = new Cathedral(world.map);
 
-            rooms[0] = entrace;
-            rooms[1] = cath;
+            world.map[0] = entrace;
+            world.map[1] = cath;
             //2-empty, 3-empty, 4-empty
         }
         public void NewGame() 
@@ -43,8 +43,10 @@ namespace DungeonCrawl
 
             Util.Print("Hello "+p.Name, ConsoleColor.Blue);
 
-            OutdoorEntrance d = new OutdoorEntrance(rooms);
-            d.PresentRoom();
+            do
+            {
+                world.map[worldIndex].PresentRoom();
+            } while (!gameWin || !gameOver);
 
             //Intro();
             //ChooseOption();
@@ -53,21 +55,12 @@ namespace DungeonCrawl
 
         private void StartSequence()
         {
+            worldIndex= 0;
             p = new Player();
             p.setName();
             gameOver = false;
             gameWin = false; 
-        }
-
-        private void decisionLoop(Room rm)
-        {
-            do
-            {
-
-            } while (!rm.ChooseOption());
-        }
-
-        
+        }        
 
         void DispalyHud()
         {

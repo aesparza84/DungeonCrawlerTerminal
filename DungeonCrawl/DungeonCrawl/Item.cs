@@ -8,7 +8,7 @@ namespace DungeonCrawl
 {
     public class Item : IUseableItem
     {
-        protected bool isKeyitem;
+        public bool isKeyitem;
         protected virtual string Name { get;  set; }
         protected virtual string Description { get; set; }
 

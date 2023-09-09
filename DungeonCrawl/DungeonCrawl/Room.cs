@@ -8,13 +8,16 @@ namespace DungeonCrawl
 {
     public class Room :IRoom
     {
-        protected Room nextRoom, prevRoom;
+        public Room nextRoom, prevRoom;
 
         protected string[] options;
         protected string Question, Info;
-        public Room() 
+        protected Room[] passedWorld;
+
+        public Room() { }
+        public Room(Room[] world) 
         {
-        
+            passedWorld= world;
         }
 
         public void ShowOptions()
@@ -57,7 +60,7 @@ namespace DungeonCrawl
 
         public virtual void PresentRoom()
         { 
-            AskQuestion();
+           
         }
 
         public virtual void showArt() { }

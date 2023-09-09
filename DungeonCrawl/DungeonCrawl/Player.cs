@@ -58,5 +58,17 @@ namespace DungeonCrawl
         { 
             inventory.Add(i);
         }
+
+        public bool ContainsKeyItem()
+        {
+            foreach (Item item in inventory)
+            {
+                if (item.isKeyitem)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
