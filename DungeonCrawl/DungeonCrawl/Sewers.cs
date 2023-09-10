@@ -51,7 +51,11 @@ namespace DungeonCrawl
                             if (!BatDisabled)
                             {
                                 BatDisabled= true;
-                                Console.WriteLine("You threw a rock and scared off the bat. They dropped whatever they were holding.");
+
+                                Console.Clear();
+                                RoomUI();
+                                showOptions();
+                                Console.WriteLine("You threw a rock and knocked out the bat. They dropped whatever they were holding.");
                                 Console.WriteLine();
                             }
                             else
@@ -169,7 +173,14 @@ namespace DungeonCrawl
         }
         public override void showArt()
         {
-            Util.Print(Art.PrintStatue(), ConsoleColor.DarkMagenta);
+            if (!BatDisabled)
+            {
+                Util.Print(Art.PrintBat(), ConsoleColor.DarkYellow);
+            }
+            else
+            {
+                Util.Print(Art.PrintBatSleep(), ConsoleColor.DarkYellow);
+            }
         }
     }
 }

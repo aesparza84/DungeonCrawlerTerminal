@@ -94,7 +94,7 @@ namespace DungeonCrawl
         {
             //Console.WriteLine(Question);
             Util.Print(Info, ConsoleColor.Yellow);
-            Util.PrintN(Question + " 'TAB to select", ConsoleColor.Red);
+            Util.PrintN(Question, ConsoleColor.Red);
         }
 
         public virtual void PresentRoom() { }

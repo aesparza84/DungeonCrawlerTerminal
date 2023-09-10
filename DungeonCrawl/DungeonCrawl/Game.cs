@@ -86,11 +86,12 @@ namespace DungeonCrawl
 
             if (gameWin)
             {
-                Util.Print("YOU WIN!!!", ConsoleColor.Cyan);
+                Util.Print($"           {p.Name} left the Cathedral with the awsome treasure.\n " +
+                    $"          YOU WIN!!!", ConsoleColor.Cyan);
             }
             else if (gameOver)
             {
-                Util.Print("You Lose.", ConsoleColor.Red);
+                Util.Print($"           {p.Name} met their fate. You Lose.", ConsoleColor.Red);
             }
             //Intro();
             //ChooseOption();

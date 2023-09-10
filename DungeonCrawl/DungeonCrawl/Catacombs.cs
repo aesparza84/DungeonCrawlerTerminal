@@ -68,6 +68,7 @@ namespace DungeonCrawl
                             {
                                 if (!passedPlayer.LookForItemType(new Bracelet()))
                                 {
+                                    
                                     Console.WriteLine("You the rummage through the pile of bones.");
                                     passedPlayer.PickUpItem(roomInventory.First());
                                 }
@@ -84,7 +85,14 @@ namespace DungeonCrawl
                                 if (passedPlayer.LookForItemType(new Sword()))
                                 {
                                     skeletonDisabled = true;
+                                    Console.Clear();
+                                    RoomUI();
+                                    showOptions();
                                     Console.WriteLine("You used the sword you found to slay the skeleton!");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You have nothing to attack it with");
                                 }
                             }
                             else
@@ -116,11 +124,17 @@ namespace DungeonCrawl
             ChooseOption();
         }
 
-        //public override void showArt()
-        //{
+        public override void showArt()
+        {
+            if (!skeletonDisabled)
+            {
+                Util.Print(Art.PrintSkelly(), ConsoleColor.DarkYellow);
+            }
+            else
+            {
+                Util.Print(Art.PrintSkellyDead(), ConsoleColor.DarkYellow);
+            }
 
-        //    Util.Print(Art.PrintDoubleDoor(), ConsoleColor.DarkGray);
-
-        //}
+        }
     }
 }

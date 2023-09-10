@@ -8,11 +8,14 @@ namespace DungeonCrawl
 {
     public class Basement: Room
     {
+        bool ChestOpened;
         public Basement(Player p) 
         {
             roomInventory = new List<Item>();
             roomInventory.Add(new Sword());
             passedPlayer = p;
+
+            ChestOpened = false;
 
             Info = "The basement is dark but you can still see. A large chest rests in the middle." +
                 " \nThere are also 2 paths you can go through: the left has " +
@@ -63,6 +66,7 @@ namespace DungeonCrawl
                                 if (!passedPlayer.LookForItemType(new Sword()))
                                 {
                                     Console.WriteLine("You open the chest");
+                                    ChestOpened = true;
                                     passedPlayer.PickUpItem(roomInventory.First());
                                 }
                                 else
@@ -187,8 +191,15 @@ namespace DungeonCrawl
 
         public override void showArt()
         {
-           
+            if (!ChestOpened)
+            {
                 Util.Print(Art.PrintDoubleDoor(), ConsoleColor.DarkGray);
+            }
+            else
+            {
+                Util.Print(Art.PrintDoubleDoorOPenChest(), ConsoleColor.DarkGray);
+            }
+                
             
         }
     }

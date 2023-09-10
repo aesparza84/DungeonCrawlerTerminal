@@ -19,9 +19,9 @@ namespace DungeonCrawl
 
             options = new string[4];
             addOption("Enter the cathedral",0);
-            addOption(" Stand around for a bit...", 1);
+            addOption("Stand around for a bit...", 1);
             addOption("Leave the property",2);
-            addOption(" Display Inventory",3);
+            addOption("Display Inventory",3);
         }
 
         public override void ChooseOption()
@@ -52,7 +52,7 @@ namespace DungeonCrawl
                             }
                             else
                             {
-                                Console.WriteLine("No more waiting");
+                                Util.Print("No more waiting", ConsoleColor.DarkRed);
                                 Console.ReadLine();
                                 MoveToNextRoom();
                                 makingDecision = true;

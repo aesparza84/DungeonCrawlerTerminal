@@ -8,9 +8,10 @@ namespace DungeonCrawl
 {
     public class Cathedral : Room
     {
-        
+        bool statueDestroyed;
         public Cathedral(Player p) 
         {
+            statueDestroyed= false;
             passedPlayer =p;
 
             roomInventory = new List<Item>();
@@ -51,16 +52,28 @@ namespace DungeonCrawl
                         switch (number)
                         {
                             case 1:
-                                if (passedPlayer.LookForItemType(new Bracelet()))
-                                {
-                                    Util.Print("The beam reflects off the bracelet and destroys the statue. You pick up the Chalice", ConsoleColor.Yellow);
-                                    Console.ReadKey();
-                                    passedPlayer.PickUpItem(roomInventory.First());
-                                }
-                                else
+                                if (!passedPlayer.LookForItemType(new Bracelet()))
                                 {
                                     Util.Print("As you approach the statue it fires a beam at you,\n preventing you from stepping closer. If only you can reflect it...", ConsoleColor.DarkRed);
                                     passedPlayer.takeDamage(50.0f);
+                                }
+                                else
+                                {
+                                    if (!statueDestroyed)
+                                    {
+                                        statueDestroyed = true;
+                                        Util.Print("The beam reflects off the bracelet and destroys the statue. You pick up the Chalice", ConsoleColor.Yellow);
+
+                                        Console.ReadKey();
+                                        Console.Clear();
+                                        RoomUI();
+                                        showOptions();
+                                        passedPlayer.PickUpItem(roomInventory.First());
+                                    }
+                                    else
+                                    {
+                                        Util.Print("You already have the treasure", ConsoleColor.DarkYellow);
+                                    }
                                 }
                                 break;
                             case 2:
@@ -172,7 +185,14 @@ namespace DungeonCrawl
         }
         public override void showArt()
         {
-            Util.Print(Art.PrintStatue(), ConsoleColor.DarkMagenta);
+            if (!statueDestroyed)
+            {
+                Util.Print(Art.PrintStatue(), ConsoleColor.DarkMagenta);
+            }
+            else
+            {
+                Util.Print(Art.PrintStatueBroken(), ConsoleColor.DarkMagenta);
+            }
         }
     }
 }
