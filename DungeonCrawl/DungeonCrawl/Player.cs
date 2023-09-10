@@ -11,6 +11,12 @@ namespace DungeonCrawl
         public float Health { get; set; }
         public string Name { get; set; }
         public List<Item> inventory;
+        private Item[] inven;
+
+        private bool hasBracelet;
+        private bool hasChestKey;
+        private bool hasSword;
+
 
         public Room currentRoom;
         public Player()
@@ -18,11 +24,35 @@ namespace DungeonCrawl
             Name = "";
             Health = 100;
             inventory= new List<Item>();
+            inven = new Item[3];
+
+            PickUpItem(new ChestKey());
+        }
+
+        public event EventHandler OnDeath;
+        public event EventHandler OnWin;
+
+        public void OnDeathEvent()
+        { 
+            OnDeath?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void OnWinEvent()
+        { 
+            OnWin?.Invoke(this, EventArgs.Empty);
         }
 
         public void takeDamage(float dmg)
         {
             Health -= dmg;
+        }
+
+        public void CheckHP()
+        {
+            if (Health <= 0.0f)
+            {
+                OnDeathEvent();
+            }
         }
 
         public void setName()
@@ -48,27 +78,47 @@ namespace DungeonCrawl
 
         public void DisplayInventory()
         {
-            foreach (Item item in inventory)
-            {
-                item.DescribeItem();
-            }
-        }
+            inven = inventory.ToArray();
+            //var inv = inventory.ToArray();
 
+            if (inventory.Count==0)
+            {
+                Console.WriteLine("Nothing to display");
+            }
+            else
+            {
+                for (int i = 0; i < inven.Length; i++)
+                {
+                    Util.Print($"{i + 1}. {inven[i].DescribeItem()}", ConsoleColor.DarkCyan);
+                }
+            }
+            
+        }
         public void PickUpItem(Item i)
         { 
             inventory.Add(i);
+            Console.WriteLine($"You aquired a {i.GetName}");
         }
 
-        public bool ContainsKeyItem()
+        public bool LookForItemType(Item t)
         {
-            foreach (Item item in inventory)
+            inven = inventory.ToArray();
+            for (int i = 0; i < inven.Length; i++)
             {
-                if (item.isKeyitem)
+                if (inven[i].GetType() == t.GetType())
                 {
                     return true;
                 }
             }
+            //foreach (Item item in inventory)
+            //{
+            //    if (item.GetType() == t.GetType())
+            //    {
+            //        return true;
+            //    }
+            //}
             return false;
         }
+
     }
 }

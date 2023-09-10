@@ -8,22 +8,22 @@ namespace DungeonCrawl
 {
     public class Item : IUseableItem
     {
-        public bool isKeyitem;
         protected virtual string Name { get;  set; }
         protected virtual string Description { get; set; }
-
-
-        public void DescribeItem()
+        public string DescribeItem()
         {
-            Console.WriteLine();
-            Util.Print(Name, ConsoleColor.Cyan);
-            Util.Print(Description, ConsoleColor.DarkCyan);
+            return Name+"\n" + "    "+Description;
 
         }
 
         public virtual void UseItem()
         {
             
+        }
+
+        public string GetName()
+        {
+            return Name;
         }
     }
 }

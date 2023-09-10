@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawl
 {
-    public class Bracelet : Item
+    public class Chalice:Item
     {
-        public Bracelet() 
+        public Chalice() 
         {
-            Name = "Reflective Bracelet";
-            Description = "A suspiciously refelctive bracelet";
+            Name = "Golden Chalice";
+            Description = "A pristine chalice of immeasurable value";
         }
     }
 }

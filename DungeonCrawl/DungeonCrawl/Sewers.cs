@@ -6,28 +6,24 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawl
 {
-    public class Cathedral : Room
+    public class Sewers:Room
     {
-        
-        public Cathedral(Player p) 
+        bool BatDisabled;
+        public Sewers(Player p) 
         {
-            passedPlayer =p;
+            passedPlayer= p;
+            BatDisabled= false;
 
-            roomInventory = new List<Item>();
-            roomInventory.Add(new Chalice());
-
-            Info = "Inside the Cathedral stands a menacing statue with glowing eyes. Behind it, however, is a golden chalice." +
-                "You also notice an open door to the side that has a steady breeze.";
+            Info = "You drop into the sewers where it stinks to high heaven. You notice a giant bat dozing off above. " +
+                "Within its wings is something shiny.";
             Question = "What do you wish to do?";
 
             options = new string[4];
-            addOption("Approach the chalice", 0);
-            addOption("Walk through the door", 1);
-            addOption("Exit through the front",2);
+            addOption("Throw a rock", 0);
+            addOption("Stand around for a bit...", 1);
+            addOption("Go back through the door", 2);
             addOption("Display Inventory", 3);
         }
-
-       
 
         public override void ChooseOption()
         {
@@ -46,24 +42,10 @@ namespace DungeonCrawl
                     switch (number)
                     {
                         case 1:
-                            if (passedPlayer.LookForItemType(new Bracelet()))
-                            {
-                                Util.Print("The beam reflects off the bracelet and destroys the statue. You pick up the Chalice", ConsoleColor.Yellow);
-                                Console.ReadKey();
-                                passedPlayer.PickUpItem(roomInventory.First());
-                            }
-                            else
-                            {
-                                Util.Print("As you approach the statue it fires a beam at you preventing you from stepping closer. If only you can reflect it...", ConsoleColor.DarkRed);
-                            }
                             break;
                         case 2:
-                            MoveToNextRoom();
-                            makingDecision= true;
                             break;
                         case 3:
-                            MoveToPrevRoom();
-                            makingDecision= true;
                             break;
                         case 4:
                             passedPlayer.DisplayInventory();
@@ -79,8 +61,10 @@ namespace DungeonCrawl
 
         //public override void ChooseOption()
         //{
+
         //    bool makingDecision = false;
         //    int index = 0;
+
         //    ConsoleKey keyInfo = new ConsoleKey();
 
         //    do
@@ -100,9 +84,7 @@ namespace DungeonCrawl
         //                keyInfo = Console.ReadKey().Key;
         //                if (keyInfo == ConsoleKey.Enter)
         //                {
-        //                    Util.Print("You approach the statue. 'Any Key' to continue", ConsoleColor.Green);
 
-        //                    makingDecision = true;
         //                }
         //                else if (keyInfo == ConsoleKey.Tab)
         //                {
@@ -115,14 +97,7 @@ namespace DungeonCrawl
         //                keyInfo = Console.ReadKey().Key;
         //                if (keyInfo == ConsoleKey.Enter)
         //                {
-        //                    Util.Print("You decide to invesitgate the side door. 'Any Key' to continue", ConsoleColor.Green);
 
-        //                    //We move into the next room
-        //                    MoveToNextRoom();
-
-
-        //                    Console.ReadKey();
-        //                    makingDecision= true;
         //                }
         //                else if (keyInfo == ConsoleKey.Tab)
         //                {
@@ -134,14 +109,7 @@ namespace DungeonCrawl
         //                keyInfo = Console.ReadKey().Key;
         //                if (keyInfo == ConsoleKey.Enter)
         //                {
-        //                    Util.Print("You decide to leave throught the front. 'Any Key' to continue", ConsoleColor.Green);
 
-        //                    //We move back to entrance
-        //                    MoveToPrevRoom();
-
-
-        //                    Console.ReadKey();
-        //                    makingDecision= true;
         //                }
         //                else if (keyInfo == ConsoleKey.Tab)
         //                {

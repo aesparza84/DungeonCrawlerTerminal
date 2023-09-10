@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawl
 {
-    public class ChestKey : Item
+    public class Sword:Item
     {
-        public ChestKey() 
-        {
+        public Sword() 
+        {            
             Name = "Chest Key";
             Description = "A large key, can probably open something";
         }
+
     }
 }

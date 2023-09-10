@@ -21,13 +21,5 @@ namespace DungeonCrawl
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }
-        public static void Highlight(string message, ConsoleColor color)
-        {
-            Console.BackgroundColor = color;
-            Print(message, ConsoleColor.DarkRed);
-            Console.BackgroundColor = ConsoleColor.Black;
-        }
-
-        
     }
 }

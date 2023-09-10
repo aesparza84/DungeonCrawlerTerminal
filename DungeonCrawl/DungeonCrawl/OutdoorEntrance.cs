@@ -9,95 +9,73 @@ namespace DungeonCrawl
     public class OutdoorEntrance: Room
     {
         int waitCounter;
-        public OutdoorEntrance(Room[] world) 
+        public OutdoorEntrance(Player p) 
         {
-            passedWorld = world;
+            passedPlayer= p;
 
             waitCounter = 0;
             Info = "You stand before the Cathedral of Liam, know to hold the powerful treasure.";
             Question = "What do you wish to do?";
 
-            options = new string[2];
+            options = new string[3];
             addOption("Enter the cathedral",0);
-            addOption("Stand around for a bit...", 1);
+            addOption(" Stand around for a bit...", 1);
+            addOption(" Display Inventory",2);
         }
 
         public override void ChooseOption()
-        {
-            
+        {            
             bool makingDecision = false;
-            int index = 0;
-
-            ConsoleKey keyInfo = new ConsoleKey();
-
+            showOptions();
             do
             {
-                RoomUI();
-                if (index > options.Length)
+                passedPlayer.CheckHP();
+                string input = Console.ReadLine();
+                if (!Int32.TryParse(input, out int number))
                 {
-                    index = 0;
+                    Console.WriteLine("Enter a valid number");
                 }
-
-                //highlight hover option
-                ShowOptions(index);
-
-                switch (index)
+                else
                 {
-                    case 0:
-                        keyInfo = Console.ReadKey().Key;
-                        if (keyInfo == ConsoleKey.Enter)
-                        {
-                            Util.Print("You decide to enter. 'Any Key' to continue", ConsoleColor.Green);
-
-                            //We move into the next room
+                    switch (number)
+                    {
+                        case 1:
                             MoveToNextRoom();
-                            Console.ReadKey();
-                            makingDecision = true;
-                        }
-                        else if (keyInfo == ConsoleKey.Tab)
-                        {
-                            index++;
-                        }
-                        break;
-
-                    case 1:
-                        
-                        keyInfo = Console.ReadKey().Key;
-                        if (keyInfo == ConsoleKey.Enter)
-                        {
+                            makingDecision= true;
+                            break;
+                        case 2:
                             if (waitCounter < 3)
                             {
-                                Util.Print("You stand outside for a bit. 'Any Key' to continue", ConsoleColor.Green);
-                                Console.ReadKey();
                                 waitCounter++;
+                                Console.WriteLine("You wait around a bit");
                             }
                             else
                             {
-                                Util.PrintN("No more waiting", ConsoleColor.DarkRed);
-
-                                //Force move to next room
-
+                                Console.WriteLine("No more waiting");
+                                Console.ReadLine();
+                                MoveToNextRoom();
                                 makingDecision = true;
                             }
+                                break; 
+                        case 3:
+                            passedPlayer.DisplayInventory();
+                            break;
 
-                        }
-                        else if (keyInfo == ConsoleKey.Tab)
-                        {
-                            index++;
-                        }
-                        break;
+                        default:
 
-                    default:
-                        index = 0;
-                        break;
+                            break;
+                    }
                 }
+
+                
+
             } while (!makingDecision);
-
-
         }
 
         public override void PresentRoom()
         {
+            Console.Clear();
+            RoomUI();
             ChooseOption();
         }
 

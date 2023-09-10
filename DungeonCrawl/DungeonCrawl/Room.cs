@@ -12,18 +12,35 @@ namespace DungeonCrawl
 
         protected string[] options;
         protected string Question, Info;
-        public string Name;
 
-        protected Room[] passedWorld;
+        protected Player passedPlayer;
+
+        protected List<Item> roomInventory;
 
         public event EventHandler OnNextRoom;
         public event EventHandler OnPrevRoom;
-
+        public event EventHandler OnSubRoomOne;
+        public event EventHandler OnSubRoomTwo;
+        public event EventHandler OnBaseRoom;
         public Room() { }
-        public Room(Room[] world) 
+        public Room(Player p) 
         {
-            passedWorld= world;
-            Name = "";
+            passedPlayer= p;
+        }
+
+
+        protected void MoveToBaseRoom()
+        {
+            OnBaseRoom?.Invoke(this, new EventArgs());  
+        }
+        protected void MoveToSubOne()
+        {
+            OnSubRoomOne?.Invoke(this, new EventArgs());
+        }
+
+        protected void MoveToSubTwo()
+        {
+            OnSubRoomTwo?.Invoke(this, new EventArgs());
         }
 
         protected void MoveToNextRoom()
@@ -60,15 +77,19 @@ namespace DungeonCrawl
                 }
             }
         }
+        protected void showOptions()
+        {
+            for (int i = 0; i < options.Length; i++)
+            {
+                Util.Print($"{i+1}.) {options[i]}", ConsoleColor.DarkYellow);
+            }
+        }
         public virtual void ChooseOption() { }
 
         protected void addOption(string message, int index)
         {
             options[index] = message;
         }
-
-       
-
         protected void AskQuestion()
         {
             //Console.WriteLine(Question);
@@ -76,15 +97,11 @@ namespace DungeonCrawl
             Util.PrintN(Question + " 'TAB to select", ConsoleColor.Red);
         }
 
-        public virtual void PresentRoom()
-        { 
-           
-        }
+        public virtual void PresentRoom() { }
         public virtual void showArt() { }
 
         protected void RoomUI()
         {
-            Console.Clear();
             showArt();
             AskQuestion();
         }

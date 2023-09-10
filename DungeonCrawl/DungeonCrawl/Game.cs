@@ -17,11 +17,23 @@ namespace DungeonCrawl
         public Game() 
         {
             p = new Player();
-            world = new World();
+            p.OnDeath += P_OnDeath;
+            p.OnWin += P_OnWin;
+
+
+            world = new World(p);
             worldIndex= 0;
         }
 
-        
+        private void P_OnWin(object? sender, EventArgs e)
+        {
+            gameWin= true;  
+        }
+
+        private void P_OnDeath(object? sender, EventArgs e)
+        {
+            gameOver= true;
+        }
 
         public void NewGame() 
         {
@@ -38,14 +50,27 @@ namespace DungeonCrawl
 
             Util.Print("Hello "+p.Name, ConsoleColor.Blue);
 
+
             do
             {
+                DispalyHud();
                 worldIndex = world.WorldIndex;
                 p.currentRoom = world.map[worldIndex];
-                //Enter the 1st room 
+                //Enter the 1st room
                 world.map[worldIndex].PresentRoom();
 
+                
+
             } while (!gameWin || !gameOver);
+
+            if (gameWin)
+            {
+                Util.Print("YOU WIN!!!", ConsoleColor.Cyan);
+            }
+            else if (gameOver)
+            {
+                Util.Print("You Lose.", ConsoleColor.Red);
+            }
 
             //Intro();
             //ChooseOption();
