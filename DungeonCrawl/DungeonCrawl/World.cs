@@ -9,21 +9,38 @@ namespace DungeonCrawl
     public class World
     {
         public Room[] map;
+        public int WorldIndex;
         public World() 
         {
-            //Array of rooms. 0 & 1 are preoocupide;
-            map = new Room[5];
+            //Array of rooms
+            map = new Room[2];
 
             map[0] = new OutdoorEntrance(map);
             map[1] = new Cathedral(map);
 
             setNextRooms();
+
+            for (int i = 0; i < map.Length; i++)
+            {
+                map[i].OnNextRoom += World_OnNextRoom;
+                map[i].OnPrevRoom += World_OnPrevRoom;
+            }
         }
 
-        public void AddRoom(Room m)
+        private void World_OnPrevRoom(object? sender, EventArgs e)
         {
-            map.Append(m);
+            WorldIndex--;
         }
+
+        private void World_OnNextRoom(object? sender, EventArgs e)
+        {
+            WorldIndex++;
+        }
+
+        private void EnterRoom(int n)
+        { 
+            
+        }        
 
         void setNextRooms()
         {

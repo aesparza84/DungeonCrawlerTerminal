@@ -11,23 +11,18 @@ namespace DungeonCrawl
         private bool gameOver, gameWin, makingDecision;
         string input;
         Player p;
-
-        OutdoorEntrance entrace;
-        Cathedral cath;
+        private int worldIndex;
 
         private World world;
-        private int worldIndex;
         public Game() 
         {
+            p = new Player();
             world = new World();
-
-            entrace = new OutdoorEntrance(world.map);
-            cath = new Cathedral(world.map);
-
-            world.map[0] = entrace;
-            world.map[1] = cath;
-            //2-empty, 3-empty, 4-empty
+            worldIndex= 0;
         }
+
+        
+
         public void NewGame() 
         {
             //Start Game - !gameOver, !gameWin, 
@@ -45,7 +40,11 @@ namespace DungeonCrawl
 
             do
             {
+                worldIndex = world.WorldIndex;
+                p.currentRoom = world.map[worldIndex];
+                //Enter the 1st room 
                 world.map[worldIndex].PresentRoom();
+
             } while (!gameWin || !gameOver);
 
             //Intro();
@@ -55,9 +54,10 @@ namespace DungeonCrawl
 
         private void StartSequence()
         {
-            worldIndex= 0;
-            p = new Player();
+            //worldIndex= 0;
+            
             p.setName();
+            p.currentRoom = world.map[worldIndex];
             gameOver = false;
             gameWin = false; 
         }        

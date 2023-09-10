@@ -11,13 +11,13 @@ namespace DungeonCrawl
         public float Health { get; set; }
         public string Name { get; set; }
         public List<Item> inventory;
-        private Item equippedItem;
+
+        public Room currentRoom;
         public Player()
         {
             Name = "";
             Health = 100;
             inventory= new List<Item>();
-            equippedItem = new Item();
         }
 
         public void takeDamage(float dmg)

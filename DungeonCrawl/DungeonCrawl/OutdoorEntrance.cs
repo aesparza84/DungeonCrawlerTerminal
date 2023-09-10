@@ -13,7 +13,7 @@ namespace DungeonCrawl
         {
             passedWorld = world;
 
-            waitCounter= 0;
+            waitCounter = 0;
             Info = "You stand before the Cathedral of Liam, know to hold the powerful treasure.";
             Question = "What do you wish to do?";
 
@@ -22,7 +22,7 @@ namespace DungeonCrawl
             addOption("Stand around for a bit...", 1);
         }
 
-        public override bool ChooseOption()
+        public override void ChooseOption()
         {
             
             bool makingDecision = false;
@@ -50,7 +50,8 @@ namespace DungeonCrawl
                             Util.Print("You decide to enter. 'Any Key' to continue", ConsoleColor.Green);
 
                             //We move into the next room
-                            
+                            MoveToNextRoom();
+                            Console.ReadKey();
                             makingDecision = true;
                         }
                         else if (keyInfo == ConsoleKey.Tab)
@@ -73,6 +74,9 @@ namespace DungeonCrawl
                             else
                             {
                                 Util.PrintN("No more waiting", ConsoleColor.DarkRed);
+
+                                //Force move to next room
+
                                 makingDecision = true;
                             }
 
@@ -89,14 +93,7 @@ namespace DungeonCrawl
                 }
             } while (!makingDecision);
 
-            return makingDecision;
-        }
 
-        private void RoomUI()
-        {
-            Console.Clear();
-            showArt();
-            AskQuestion();
         }
 
         public override void PresentRoom()

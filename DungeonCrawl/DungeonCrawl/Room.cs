@@ -12,13 +12,31 @@ namespace DungeonCrawl
 
         protected string[] options;
         protected string Question, Info;
+        public string Name;
+
         protected Room[] passedWorld;
+
+        public event EventHandler OnNextRoom;
+        public event EventHandler OnPrevRoom;
 
         public Room() { }
         public Room(Room[] world) 
         {
             passedWorld= world;
+            Name = "";
         }
+
+        protected void MoveToNextRoom()
+        { 
+            OnNextRoom?.Invoke(this, new EventArgs());
+        }
+
+        protected void MoveToPrevRoom()
+        {
+            OnPrevRoom?.Invoke(this, new EventArgs());
+        }
+
+
 
         public void ShowOptions()
         {
@@ -42,7 +60,7 @@ namespace DungeonCrawl
                 }
             }
         }
-        public virtual bool ChooseOption() { return true; }
+        public virtual void ChooseOption() { }
 
         protected void addOption(string message, int index)
         {
@@ -62,7 +80,13 @@ namespace DungeonCrawl
         { 
            
         }
-
         public virtual void showArt() { }
+
+        protected void RoomUI()
+        {
+            Console.Clear();
+            showArt();
+            AskQuestion();
+        }
     }
 }

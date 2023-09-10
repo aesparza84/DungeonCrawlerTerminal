@@ -11,7 +11,6 @@ namespace DungeonCrawl
         // void ShowOptions();
         void showArt();
         void ShowOptions(int n);
-        bool ChooseOption();
-
+        void ChooseOption();
     }
 }
