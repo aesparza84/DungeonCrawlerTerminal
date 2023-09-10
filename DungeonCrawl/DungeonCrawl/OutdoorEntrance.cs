@@ -29,7 +29,7 @@ namespace DungeonCrawl
             showOptions();
             do
             {
-                passedPlayer.CheckHP();
+                passedPlayer.HasDied();
                 string input = Console.ReadLine();
                 if (!Int32.TryParse(input, out int number))
                 {

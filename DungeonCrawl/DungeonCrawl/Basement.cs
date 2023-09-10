@@ -11,10 +11,10 @@ namespace DungeonCrawl
         public Basement(Player p) 
         {
             roomInventory = new List<Item>();
-            //roomInventory.Add();
-            passedPlayer= p;
+            roomInventory.Add(new Sword());
+            passedPlayer = p;
 
-            Info = "The basement is dark but you can still see. A large chest rests in the middle. There are also 2 paths you can go through: the left has" +
+            Info = "The basement is dark but you can still see. A large chest rests in the middle. \nThere are also 2 paths you can go through: the left has" +
                 "a funky smell; the right has a dark aura around the entrance";
             Question = "What do you wish to do?";
 
@@ -31,7 +31,10 @@ namespace DungeonCrawl
             showOptions();
             do
             {
-                passedPlayer.CheckHP();
+                if (passedPlayer.HasDied())
+                {
+                    makingDecision = true;
+                }
                 string input = Console.ReadLine();
                 if (!Int32.TryParse(input, out int number))
                 {

@@ -35,45 +35,53 @@ namespace DungeonCrawl
             showOptions();
             do
             {
-                passedPlayer.CheckHP();
-                string input = Console.ReadLine();
-                if (!Int32.TryParse(input, out int number))
+                if (passedPlayer.HasDied())
                 {
-                    Console.WriteLine("Enter a valid number");
+                    makingDecision = true;
                 }
                 else
                 {
-                    switch (number)
+                    string input = Console.ReadLine();
+                    if (!Int32.TryParse(input, out int number))
                     {
-                        case 1:
-                            if (passedPlayer.LookForItemType(new Bracelet()))
-                            {
-                                Util.Print("The beam reflects off the bracelet and destroys the statue. You pick up the Chalice", ConsoleColor.Yellow);
-                                Console.ReadKey();
-                                passedPlayer.PickUpItem(roomInventory.First());
-                            }
-                            else
-                            {
-                                Util.Print("As you approach the statue it fires a beam at you preventing you from stepping closer. If only you can reflect it...", ConsoleColor.DarkRed);
-                            }
-                            break;
-                        case 2:
-                            MoveToNextRoom();
-                            makingDecision= true;
-                            break;
-                        case 3:
-                            MoveToPrevRoom();
-                            makingDecision= true;
-                            break;
-                        case 4:
-                            passedPlayer.DisplayInventory();
-                            break;
+                        Console.WriteLine("Enter a valid number");
+                    }
+                    else
+                    {
+                        switch (number)
+                        {
+                            case 1:
+                                if (passedPlayer.LookForItemType(new Bracelet()))
+                                {
+                                    Util.Print("The beam reflects off the bracelet and destroys the statue. You pick up the Chalice", ConsoleColor.Yellow);
+                                    Console.ReadKey();
+                                    passedPlayer.PickUpItem(roomInventory.First());
+                                }
+                                else
+                                {
+                                    Util.Print("As you approach the statue it fires a beam at you,\n preventing you from stepping closer. If only you can reflect it...", ConsoleColor.DarkRed);
+                                    passedPlayer.takeDamage(50.0f);
+                                }
+                                break;
+                            case 2:
+                                MoveToNextRoom();
+                                makingDecision = true;
+                                break;
+                            case 3:
+                                MoveToPrevRoom();
+                                makingDecision = true;
+                                break;
+                            case 4:
+                                passedPlayer.DisplayInventory();
+                                break;
 
-                        default:
+                            default:
 
-                            break;
+                                break;
+                        }
                     }
                 }
+                
             } while (!makingDecision);
         }
 

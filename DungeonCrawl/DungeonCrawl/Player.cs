@@ -13,20 +13,15 @@ namespace DungeonCrawl
         public List<Item> inventory;
         private Item[] inven;
 
-        private bool hasBracelet;
-        private bool hasChestKey;
-        private bool hasSword;
-
 
         public Room currentRoom;
         public Player()
         {
             Name = "";
             Health = 100;
+
             inventory= new List<Item>();
             inven = new Item[3];
-
-            PickUpItem(new ChestKey());
         }
 
         public event EventHandler OnDeath;
@@ -45,13 +40,20 @@ namespace DungeonCrawl
         public void takeDamage(float dmg)
         {
             Health -= dmg;
+            Console.WriteLine($"You just took {dmg} damage!");
         }
 
-        public void CheckHP()
+        
+        public bool HasDied()
         {
             if (Health <= 0.0f)
             {
                 OnDeathEvent();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

@@ -11,6 +11,9 @@ namespace DungeonCrawl
         bool BatDisabled;
         public Sewers(Player p) 
         {
+            roomInventory = new List<Item>();
+            roomInventory.Add(new ChestKey());
+
             passedPlayer= p;
             BatDisabled= false;
 
@@ -31,7 +34,10 @@ namespace DungeonCrawl
             showOptions();
             do
             {
-                passedPlayer.CheckHP();
+                if (passedPlayer.HasDied())
+                {
+                    makingDecision = true;
+                }
                 string input = Console.ReadLine();
                 if (!Int32.TryParse(input, out int number))
                 {
@@ -46,6 +52,8 @@ namespace DungeonCrawl
                         case 2:
                             break;
                         case 3:
+                            MoveToBaseRoom();
+                            makingDecision= true;
                             break;
                         case 4:
                             passedPlayer.DisplayInventory();

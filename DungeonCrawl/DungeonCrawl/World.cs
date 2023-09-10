@@ -16,12 +16,13 @@ namespace DungeonCrawl
         {
             passedPlayer= p;
             //Array of rooms
-            map = new Room[4];
+            map = new Room[5];
 
             map[0] = new OutdoorEntrance(passedPlayer);
             map[1] = new Cathedral(passedPlayer);
             map[2] = new Basement(passedPlayer);
             map[3] = new Sewers(passedPlayer);
+            map[4] = new Catacombs(passedPlayer);
 
             setNextRooms();
 

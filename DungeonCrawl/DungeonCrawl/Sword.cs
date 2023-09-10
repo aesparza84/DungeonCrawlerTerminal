@@ -10,8 +10,8 @@ namespace DungeonCrawl
     {
         public Sword() 
         {            
-            Name = "Chest Key";
-            Description = "A large key, can probably open something";
+            Name = "Sword";
+            Description = "An armingsowrd with a sharp blade";
         }
 
     }

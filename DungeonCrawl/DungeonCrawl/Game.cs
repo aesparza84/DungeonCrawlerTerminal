@@ -61,7 +61,7 @@ namespace DungeonCrawl
 
                 
 
-            } while (!gameWin || !gameOver);
+            } while (!gameWin && !gameOver);
 
             if (gameWin)
             {
