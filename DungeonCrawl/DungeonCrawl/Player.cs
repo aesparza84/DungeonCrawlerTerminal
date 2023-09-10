@@ -9,7 +9,7 @@ namespace DungeonCrawl
     public class Player : IDamagable
     {
         public float Health { get; set; }
-        public string Name { get; set; }
+        public string Name { get; private set; }
         public List<Item> inventory;
         private Item[] inven;
 
@@ -22,6 +22,9 @@ namespace DungeonCrawl
 
             inventory= new List<Item>();
             inven = new Item[3];
+
+            PickUpItem(new Sword());
+            PickUpItem(new Bracelet());
         }
 
         public event EventHandler OnDeath;
@@ -99,7 +102,7 @@ namespace DungeonCrawl
         public void PickUpItem(Item i)
         { 
             inventory.Add(i);
-            Console.WriteLine($"You aquired a {i.GetName}");
+            Console.WriteLine($"You aquired a {i.Name}");
         }
 
         public bool LookForItemType(Item t)

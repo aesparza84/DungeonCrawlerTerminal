@@ -8,8 +8,14 @@ namespace DungeonCrawl
 {
     public class Item : IUseableItem
     {
-        protected virtual string Name { get;  set; }
-        protected virtual string Description { get; set; }
+        public string Name { get;  set; }
+        protected string Description { get; set; }
+
+        public Item() 
+        {
+            Name = "";
+            Description = "";
+        }
         public string DescribeItem()
         {
             return Name+"\n" + "    "+Description;

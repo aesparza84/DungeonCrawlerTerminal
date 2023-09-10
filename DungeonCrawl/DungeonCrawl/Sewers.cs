@@ -23,7 +23,7 @@ namespace DungeonCrawl
 
             options = new string[4];
             addOption("Throw a rock", 0);
-            addOption("Stand around for a bit...", 1);
+            addOption("Grab the item", 1);
             addOption("Go back through the door", 2);
             addOption("Display Inventory", 3);
         }
@@ -48,9 +48,30 @@ namespace DungeonCrawl
                     switch (number)
                     {
                         case 1:
+                            if (!BatDisabled)
+                            {
+                                BatDisabled= true;
+                                Console.WriteLine("You threw a rock and scared off the bat. They dropped whatever they were holding.");
+                                Console.WriteLine();
+                            }
+                            else
+                            {
+                                Console.WriteLine("The giant bat is already gone.");
+                            }
                             break;
+
                         case 2:
+                            if (!BatDisabled)
+                            {
+                                Console.WriteLine("You attempted to grab the item, but the bat is agitated.");
+                                passedPlayer.takeDamage(30);
+                            }
+                            else
+                            {
+                                passedPlayer.PickUpItem(roomInventory.First());
+                            }
                             break;
+
                         case 3:
                             MoveToBaseRoom();
                             makingDecision= true;

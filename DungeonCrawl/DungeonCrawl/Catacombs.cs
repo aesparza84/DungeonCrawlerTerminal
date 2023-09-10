@@ -82,8 +82,7 @@ namespace DungeonCrawl
                             else
                             {
                                 Console.WriteLine("The skeleton is already dead.");
-                            }
-                            
+                            }                            
                             break;
 
                         case 3:
