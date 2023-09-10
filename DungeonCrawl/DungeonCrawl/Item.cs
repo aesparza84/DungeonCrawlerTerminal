@@ -19,12 +19,6 @@ namespace DungeonCrawl
         public string DescribeItem()
         {
             return Name+"\n" + "    "+Description;
-
-        }
-
-        public virtual void UseItem()
-        {
-            
         }
 
         public string GetName()

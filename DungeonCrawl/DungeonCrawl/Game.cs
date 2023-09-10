@@ -8,7 +8,7 @@ namespace DungeonCrawl
 {
     public class Game
     {
-        private bool gameOver, gameWin, makingDecision;
+        private bool gameOver, gameWin, playerDone;
         string input;
         Player p;
         private int worldIndex;
@@ -35,8 +35,30 @@ namespace DungeonCrawl
             gameOver= true;
         }
 
+        public void RunGame()
+        {
+            do
+            {
+                Menu();
+            } while (!playerDone);
+            Environment.Exit(0);
+        }
+
+        private void ResetGame()
+        {
+            p.OnDeath-= P_OnDeath;
+            p.OnWin-= P_OnWin;
+
+            p = new Player();
+            p.OnDeath += P_OnDeath;
+            p.OnWin += P_OnWin;
+            world = new World(p);
+            worldIndex= 0;
+        }
+
         public void NewGame() 
         {
+            ResetGame();
             //Start Game - !gameOver, !gameWin, 
                 //Player chooses name
                 // ASCII church and enter ReadKey
@@ -53,7 +75,6 @@ namespace DungeonCrawl
 
             do
             {
-                DispalyHud();
                 worldIndex = world.WorldIndex;
                 p.currentRoom = world.map[worldIndex];
                 //Enter the 1st room
@@ -71,7 +92,6 @@ namespace DungeonCrawl
             {
                 Util.Print("You Lose.", ConsoleColor.Red);
             }
-
             //Intro();
             //ChooseOption();
 
@@ -86,6 +106,38 @@ namespace DungeonCrawl
             gameOver = false;
             gameWin = false; 
         }        
+
+        private void Menu()
+        {
+            
+            bool done = false;
+
+            ConsoleKey keyInfo = new ConsoleKey();
+
+            do
+            {
+                Util.Print("Press 'R' to restart, 'Q' to exit app", ConsoleColor.Gray);
+                keyInfo = Console.ReadKey().Key;
+                if (keyInfo != ConsoleKey.R && keyInfo != ConsoleKey.Q)
+                {
+                    Util.Print("Invalid, enter R or Q",ConsoleColor.Red);
+                }
+                switch (keyInfo)
+                {
+                    case ConsoleKey.R:
+                        Console.Clear();
+                        NewGame();
+                        break;
+                    case ConsoleKey.Q:
+                        playerDone= true;
+                        done= true;
+                        break;
+                }
+
+            } while (!done);
+            
+
+        }
 
         void DispalyHud()
         {

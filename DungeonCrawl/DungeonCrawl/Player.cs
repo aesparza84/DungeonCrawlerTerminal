@@ -21,10 +21,6 @@ namespace DungeonCrawl
             Health = 100;
 
             inventory= new List<Item>();
-            inven = new Item[3];
-
-            PickUpItem(new Sword());
-            PickUpItem(new Bracelet());
         }
 
         public event EventHandler OnDeath;
@@ -122,6 +118,7 @@ namespace DungeonCrawl
             //        return true;
             //    }
             //}
+            
             return false;
         }
 

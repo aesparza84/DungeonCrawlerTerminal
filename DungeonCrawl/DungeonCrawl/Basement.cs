@@ -14,7 +14,8 @@ namespace DungeonCrawl
             roomInventory.Add(new Sword());
             passedPlayer = p;
 
-            Info = "The basement is dark but you can still see. A large chest rests in the middle. \nThere are also 2 paths you can go through: the left has" +
+            Info = "The basement is dark but you can still see. A large chest rests in the middle." +
+                " \nThere are also 2 paths you can go through: the left has " +
                 "a funky smell; the right has a dark aura around the entrance";
             Question = "What do you wish to do?";
 
@@ -59,8 +60,16 @@ namespace DungeonCrawl
                         case 3:
                             if (passedPlayer.LookForItemType(new ChestKey()))
                             {
-                                Console.WriteLine("You open the chest");
-                                Console.WriteLine($"There is a |{roomInventory.First().GetName()}|");
+                                if (!passedPlayer.LookForItemType(new Sword()))
+                                {
+                                    Console.WriteLine("You open the chest");
+                                    passedPlayer.PickUpItem(roomInventory.First());
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You already picked up the item.");
+                                }
+                                
                             }
                             else
                             {

@@ -66,7 +66,15 @@ namespace DungeonCrawl
                             }
                             else
                             {
-                                passedPlayer.PickUpItem(roomInventory.First());
+                                if (!passedPlayer.LookForItemType(new Bracelet()))
+                                {
+                                    Console.WriteLine("You the rummage through the pile of bones.");
+                                    passedPlayer.PickUpItem(roomInventory.First());
+                                }
+                                else
+                                { 
+                                    Console.WriteLine("You alrady picked up the item");
+                                }
                             }
                             break;
 

@@ -68,7 +68,15 @@ namespace DungeonCrawl
                             }
                             else
                             {
-                                passedPlayer.PickUpItem(roomInventory.First());
+                                if (!passedPlayer.LookForItemType(new ChestKey()))
+                                {
+                                    passedPlayer.PickUpItem(roomInventory.First());
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You already picked up the item.");
+                                }
+                                
                             }
                             break;
 

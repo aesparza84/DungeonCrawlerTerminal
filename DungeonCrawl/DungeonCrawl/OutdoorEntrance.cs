@@ -17,10 +17,11 @@ namespace DungeonCrawl
             Info = "You stand before the Cathedral of Liam, know to hold the powerful treasure.";
             Question = "What do you wish to do?";
 
-            options = new string[3];
+            options = new string[4];
             addOption("Enter the cathedral",0);
             addOption(" Stand around for a bit...", 1);
-            addOption(" Display Inventory",2);
+            addOption("Leave the property",2);
+            addOption(" Display Inventory",3);
         }
 
         public override void ChooseOption()
@@ -58,6 +59,18 @@ namespace DungeonCrawl
                             }
                                 break; 
                         case 3:
+                            if (!passedPlayer.LookForItemType(new Chalice()))
+                            {
+                                Console.WriteLine("You don't have the powerful treasure yet");
+                            }
+                            else
+                            {
+                                passedPlayer.OnWinEvent();
+                                makingDecision= true;
+                            }
+                            break;
+
+                        case 4:
                             passedPlayer.DisplayInventory();
                             break;
 

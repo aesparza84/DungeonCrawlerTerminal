@@ -8,6 +8,6 @@ namespace DungeonCrawl
 {
     public interface IUseableItem
     {
-        void UseItem();
+        string DescribeItem();
     }
 }
