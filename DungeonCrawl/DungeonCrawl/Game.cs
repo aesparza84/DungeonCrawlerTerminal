@@ -70,8 +70,8 @@ namespace DungeonCrawl
 
             StartSequence();
 
-            Util.Print("Hello "+p.Name, ConsoleColor.Blue);
-
+            Util.Print("Hello "+p.Name+". Starting Health: "+p.Health+". Enter to continue", ConsoleColor.Yellow);
+            Console.ReadLine();
 
             do
             {

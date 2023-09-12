@@ -54,7 +54,7 @@ namespace DungeonCrawl
                             case 1:
                                 if (!passedPlayer.LookForItemType(new Bracelet()))
                                 {
-                                    Util.Print("As you approach the statue it fires a beam at you,\n preventing you from stepping closer. If only you can reflect it...", ConsoleColor.DarkRed);
+                                    Util.Print("As you approach the statue it fires a beam at you, preventing you from stepping closer.\nIf only you can reflect it...\n", ConsoleColor.White);
                                     passedPlayer.takeDamage(50.0f);
                                 }
                                 else
