@@ -17,7 +17,7 @@ namespace DungeonCrawl
             roomInventory = new List<Item>();
             roomInventory.Add(new Chalice());
 
-            Info = "Inside the Cathedral stands a menacing statue with glowing eyes. Behind it, however, is a golden chalice." +
+            Info = "Inside the Cathedral stands a menacing statue with glowing eyes. Behind it, however, is the powerful golden chalice." +
                 "You also notice an open door to the side that has a steady breeze.";
             Question = "What do you wish to do?";
 
