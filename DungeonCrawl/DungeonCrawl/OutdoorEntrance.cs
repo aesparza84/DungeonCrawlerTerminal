@@ -14,7 +14,7 @@ namespace DungeonCrawl
             passedPlayer= p;
 
             waitCounter = 0;
-            Info = "You stand before the Cathedral of Liam, know to hold the powerful treasure.";
+            Info = "You stand before the Cathedral of Liam, known to hold the powerful treasure.";
             Question = "What do you wish to do?";
 
             options = new string[4];
